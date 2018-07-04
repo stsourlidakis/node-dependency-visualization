@@ -1,5 +1,5 @@
 {
-  "name": "dependency-visualization",
+  "name": "dep-vis",
   "version": "1.0.0",
   "description": "visualization of npm dependencies",
   "main": "index.js",
