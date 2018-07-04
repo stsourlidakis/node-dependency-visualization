@@ -1,0 +1,24 @@
+{
+  "name": "dependency-visualization",
+  "version": "1.0.0",
+  "description": "visualization of npm dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stsourlidakis/node-dependency-visualization.git"
+  },
+  "keywords": [
+    "npm",
+    "dependency",
+    "visualization"
+  ],
+  "author": "Stavros Tsourlidakis <s.tsourlidakis@hotmail.com> (https://stsourlidakis.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stsourlidakis/node-dependency-visualization/issues"
+  },
+  "homepage": "https://github.com/stsourlidakis/node-dependency-visualization#readme"
+}
