@@ -1,7 +1,7 @@
 const exec = require('await-exec');
 const fs = require('fs');
 
-let fileName = 'dependency-data.js';
+let fileName = './public/dependency-data.js';
 let data = {
 	nodes: [],
 	edges: []
