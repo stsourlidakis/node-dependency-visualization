@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/stsourlidakis/node-dependency-visualization/issues"
   },
-  "homepage": "https://github.com/stsourlidakis/node-dependency-visualization#readme"
+  "homepage": "https://github.com/stsourlidakis/node-dependency-visualization#readme",
+  "dependencies": {
+    "await-exec": "^0.1.1"
+  }
 }
