@@ -7,9 +7,7 @@ let data = {
 	edges: []
 };
 
-init();
-
-async function init(){
+module.exports = async function(){
 	const {stdout} =  await exec('npm ls --json');
 	const dependencies = JSON.parse(stdout);
 

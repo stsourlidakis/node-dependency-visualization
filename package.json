@@ -1,11 +1,15 @@
 {
   "name": "dep-vis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "visualization of npm dependencies",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "dep-vis": "./bin/cli.js"
+  },
+  "preferGlobal": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stsourlidakis/node-dependency-visualization.git"
