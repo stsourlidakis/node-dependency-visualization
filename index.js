@@ -19,7 +19,7 @@ let data = {
 };
 
 module.exports = async function(){
-	const {stdout} =  await exec('npm ls --json --silent');
+	const {stdout} = await exec(`npm ls --production --json --silent`);
 	const dependencies = JSON.parse(stdout);
 
 	addBaseNode(dependencies.name);
