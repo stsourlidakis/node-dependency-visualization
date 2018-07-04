@@ -22,7 +22,7 @@ module.exports = async function(){
 	const {stdout} =  await exec('npm ls --json');
 	const dependencies = JSON.parse(stdout);
 
-	data.nodes.push({id: dependencies.name, label: dependencies.name});
+	addBaseNode(dependencies.name);
 	addLevel(dependencies.dependencies, dependencies.name);
 
 	const visData = 'const data = ' + JSON.stringify(data);
@@ -37,6 +37,18 @@ module.exports = async function(){
 	});
 }
 
+function addBaseNode(name){
+	data.nodes.push({
+		id: name,
+		label: name,
+		borderWidth: 2,
+		color: {
+			border: "#168235",
+			highlight: { background: "#222", border: "#168235" }
+		},
+		font: { size: 20 }
+	});
+}
 
 function addLevel(obj, name){
 	if(typeof obj === undefined) return;
