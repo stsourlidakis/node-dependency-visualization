@@ -1,7 +1,18 @@
 const exec = require('await-exec');
 const fs = require('fs');
 
-let fileName = './public/dependency-data.js';
+const http = require('http');
+const finalhandler = require('finalhandler');
+const serveStatic = require('serve-static');
+const port = 8080;
+
+const serve = serveStatic(__dirname+'/public/');
+const server = http.createServer(function(req, res) {
+	const done = finalhandler(req, res);
+	serve(req, res, done);
+});
+
+const fileName = __dirname+'/public/dependency-data.js';
 let data = {
 	nodes: [],
 	edges: []
@@ -21,6 +32,7 @@ module.exports = async function(){
 			console.log(err);
 		} else {
 			console.log('Visualization data ready.');
+			runServer();
 		}
 	});
 }
@@ -46,4 +58,10 @@ function nodeExists(id){
 	}
 	
 	return false;
+}
+
+function runServer(){
+	server.listen(port, function(){
+		console.log(`Visit http://localhost:${port}`);
+	});
 }
