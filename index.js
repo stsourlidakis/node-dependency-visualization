@@ -1,6 +1,10 @@
 const exec = require('await-exec');
 const fs = require('fs');
 
+const chalk = require('chalk');
+const green = (msg) => console.log(chalk.green(msg));
+const blue = (msg) => console.log(chalk.blue(msg));
+
 const http = require('http');
 const finalhandler = require('finalhandler');
 const serveStatic = require('serve-static');
@@ -19,9 +23,13 @@ let data = {
 };
 
 module.exports = async function(){
+	blue('Getting dependencies from npm ls..');
 	const {stdout} = await exec(`npm ls --production --json --silent`, {maxBuffer: 1024 * 1000});
+	blue('Parsing dependencies..');
 	const visData = parseDependencies(stdout)
+	blue('Saving file..');
 	await saveData(visData, fileName);
+	blue('Starting server..');
 	runServer();
 }
 
@@ -80,6 +88,6 @@ function nodeExists(id){
 
 function runServer(){
 	server.listen(port, function(){
-		console.log(`Visit http://localhost:${port}`);
+		green(`Visit http://localhost:${port}`);
 	});
 }
