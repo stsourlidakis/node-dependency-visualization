@@ -20,20 +20,26 @@ let data = {
 
 module.exports = async function(){
 	const {stdout} = await exec(`npm ls --production --json --silent`, {maxBuffer: 1024 * 1000});
+	const visData = parseDependencies(stdout)
+	await saveData(visData, fileName);
+	runServer();
+}
+
+function parseDependencies(stdout){
 	const dependencies = JSON.parse(stdout);
 
 	addBaseNode(dependencies.name);
 	addLevel(dependencies.dependencies, dependencies.name);
 
-	const visData = 'const data = ' + JSON.stringify(data);
+	return 'const data = ' + JSON.stringify(data);
+}
 
-	fs.writeFile(fileName, visData, 'utf8', function(err){
-		if(err){
-			console.log(err);
-		} else {
-			console.log('Visualization data ready.');
-			runServer();
-		}
+function saveData(data, fileName){
+	return new Promise((resolve, reject) => {
+		fs.writeFile(fileName, data, 'utf8', (err) => {
+			if (err) reject(err);
+			else resolve();
+		})
 	});
 }
 
