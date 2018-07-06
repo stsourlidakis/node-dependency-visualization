@@ -4,6 +4,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const green = (msg) => console.log(chalk.green(msg));
 const blue = (msg) => console.log(chalk.blue(msg));
+const red = (msg) => console.log(chalk.red(msg));
 
 const http = require('http');
 const finalhandler = require('finalhandler');
@@ -23,10 +24,20 @@ let data = {
 };
 
 module.exports = async function(){
-	blue('Getting dependencies from npm ls..');
-	const {stdout} = await exec(`npm ls --production --json --silent`, {maxBuffer: 1024 * 1000});
+	try{
+		blue('Getting dependencies from npm ls..');
+		const {stdout} = await exec(`npm ls --production --json --silent`, {maxBuffer: 1024 * 1000});
+		handleStdout(stdout)
+	} catch(err){
+		red('npm ls returned non 0 exit code, things may break');
+		handleStdout(err.stdout);
+	}
+}
+
+async function handleStdout(stdout){
 	blue('Parsing dependencies..');
-	const visData = parseDependencies(stdout)
+	const visData = parseDependencies(stdout);
+	console.log(data.nodes.length, data.edges.length);
 	blue('Saving file..');
 	await saveData(visData, fileName);
 	blue('Starting server..');
